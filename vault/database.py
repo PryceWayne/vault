@@ -11,12 +11,12 @@ def get_db_path() -> Path:
     """Get the database file path."""
     # Use environment variable if set, otherwise use home directory
     if os.environ.get('RAILWAY_ENVIRONMENT'):
-        # On Railway, use /app/data directory
-        vault_dir = Path('/app/data')
+        # On Railway, use relative path in app directory
+        vault_dir = Path('.')
     else:
         # Local development
         vault_dir = Path.home() / '.vault'
-    vault_dir.mkdir(exist_ok=True)
+        vault_dir.mkdir(exist_ok=True)
     return vault_dir / 'vault.db'
 
 
