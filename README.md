@@ -8,7 +8,7 @@
 ![SQLite](https://img.shields.io/badge/SQLite-Database-orange?style=for-the-badge&logo=sqlite&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)
 
-### Track your Pokemon TCG collection's value with real-time pricing and financial analytics
+### Track your Pokemon TCG collection's value with real-time pricing and AI-powered financial analytics
 
 [Features](#features) | [Quick Start](#quick-start) | [Screenshots](#screenshots) | [Documentation](#documentation)
 
@@ -24,7 +24,8 @@ Pokemon TCG collecting has become a serious investment for many. Whether you're 
 - Track **daily price movements** across your holdings
 - Calculate **profit & loss** with cost basis tracking
 - Identify **concentration risk** in overweight positions
-- Make **informed decisions** about buying, selling, or holding
+- Get **AI-powered insights** on when to take profits or cut losses
+- Monitor **top gainers and losers** in your portfolio
 
 ---
 
@@ -35,11 +36,7 @@ Pokemon TCG collecting has become a serious investment for many. Whether you're 
 ### Dashboard Overview
 ![Dashboard](screenshots/dashboard.png)
 
-### Portfolio Analytics
-![Analytics](screenshots/analytics.png)
-
-### Collection Management
-![Collection](screenshots/collection.png)
+*Glassmorphism UI with animated backgrounds, real-time portfolio value, and P&L tracking*
 
 </div>
 
@@ -47,30 +44,34 @@ Pokemon TCG collecting has become a serious investment for many. Whether you're 
 
 ## Features
 
+### Modern Dashboard (v2.0)
+- **Glassmorphism UI** with animated gradient backgrounds
+- **Responsive design** - optimized for desktop, tablet, and mobile
+- **Dark theme** with purple accent colors
+- **Smooth animations** for polished user experience
+- **Top Movers section** - see gainers and losers at a glance
+
+### AI-Powered Insights
+- **Portfolio Health Score** - overall portfolio assessment (0-100)
+- **Market Momentum** - track if your holdings are rising or falling
+- **Profit Taking Alerts** - notifications when items are up 50%+
+- **Loss Review Warnings** - flags items down 25%+ for review
+- **Concentration Risk** - alerts when top 5 holdings exceed 50%
+- **Cost Tracking Reminders** - prompts to add missing cost basis
+
 ### Portfolio Management
 - Import collections from **Collectr CSV exports**
 - Real-time price fetching from **Pokemon TCG API**
 - Track **cards** and **sealed products** separately
 - Store **price history** for trend analysis
-
-### Modern Dashboard
-- **Glassmorphism UI** with animated gradient backgrounds
-- **Responsive design** - works on desktop, tablet, and mobile
-- **Smooth animations** for polished user experience
-- **Dark theme** optimized for extended viewing
+- **Editable cost basis** with auto-save functionality
 
 ### Financial Analytics
 - **Total portfolio value** with daily change tracking
 - **P&L calculation** - enter cost basis to see actual returns
-- **Concentration analysis** - identify overweight positions
-- **Top holdings** breakdown with percentage allocation
+- **Composition breakdown** - cards vs sealed visualization
+- **Top holdings** with percentage allocation
 - **Best/worst performers** by P&L percentage
-
-### Data Management
-- **SQLite database** - lightweight, no server setup required
-- **CSV import/export** for data portability
-- **Editable cost basis** with auto-save functionality
-- **CLI tools** for power users
 
 ---
 
@@ -92,7 +93,7 @@ Pokemon TCG collecting has become a serious investment for many. Whether you're 
 
 ```bash
 # Clone the repository
-git clone https://github.com/PryceWayne/vault.git
+git clone https://github.com/PryceHedrick/vault.git
 cd vault
 
 # Install dependencies
@@ -125,44 +126,7 @@ Open **http://localhost:5000** in your browser.
 
 ---
 
-## Documentation
-
-### Deployment
-
-<details>
-<summary><strong>Deploy to Railway (Recommended)</strong></summary>
-
-1. Fork this repository
-2. Go to [Railway.app](https://railway.app)
-3. Click **"New Project"** → **"Deploy from GitHub"**
-4. Select your forked repo
-5. Railway auto-detects the Procfile and deploys
-
-</details>
-
-<details>
-<summary><strong>Deploy to Render</strong></summary>
-
-1. Fork this repository
-2. Go to [Render.com](https://render.com)
-3. Create new **"Web Service"**
-4. Connect your GitHub repo
-5. Set build command: `pip install -r requirements.txt`
-6. Set start command: `gunicorn vault.web:app`
-
-</details>
-
-### CSV Format
-
-The importer expects Collectr export format with these columns:
-
-```
-Portfolio Name, Category, Set, Product Name, Card Number,
-Rarity, Variance, Grade, Card Condition, Average Cost Paid,
-Quantity, Market Price, Price Override, Watchlist, Date Added, Notes
-```
-
-### API Endpoints
+## API Endpoints
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
@@ -170,47 +134,25 @@ Quantity, Market Price, Price Override, Watchlist, Date Added, Notes
 | `/api/analysis` | GET | Portfolio analysis JSON |
 | `/api/items` | GET | All items with prices |
 | `/api/items/<id>/cost` | POST | Update item cost basis |
-
-### Database Schema
-
-```sql
-items (
-    id, name, set_name, card_number, rarity, variance,
-    quantity, cost_basis, is_sealed, api_id, portfolio_name,
-    grade, condition, notes, date_added, created_at, updated_at
-)
-
-prices (id, item_id, price, timestamp)
-
-price_alerts (id, item_id, threshold_pct, direction, triggered_at)
-```
+| `/api/items/<id>/history` | GET | Price history for item |
 
 ---
 
-## Contributing
+## What's New in v2.0
 
-Contributions are welcome! Feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/YourFeature`)
-3. Commit your changes (`git commit -m 'Add YourFeature'`)
-4. Push to the branch (`git push origin feature/YourFeature`)
-5. Open a Pull Request
+- Completely redesigned UI with glassmorphism and animated backgrounds
+- Top Movers section showing gainers and losers
+- Enhanced AI insights with market momentum tracking
+- Improved mobile responsiveness with optimized layouts
+- Portfolio health scoring with actionable recommendations
+- Better visual hierarchy with gradient text and glow effects
+- Smoother animations with staggered entry effects
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## Acknowledgments
-
-- [Pokemon TCG API](https://pokemontcg.io/) for market price data
-- [Collectr](https://www.collectr.com/) for CSV export format compatibility
-- [Tailwind CSS](https://tailwindcss.com/) for the styling framework
-- [Chart.js](https://www.chartjs.org/) for data visualization
+MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
@@ -218,6 +160,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built for Pokemon TCG collectors who take their portfolio seriously**
 
-[Pryce Hedrick](https://github.com/PryceWayne)
+[Pryce Hedrick](https://github.com/PryceHedrick) | [Pryceless Solutions](https://prycehedrick.com)
 
 </div>
